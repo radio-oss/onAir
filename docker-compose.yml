@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  isfahan-conductor-lan:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: irib_isfahan_conductor
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PLAYOUT_SERVER_HOST=127.0.0.1
+      - PLAYOUT_SERVER_PORT=5250
+    volumes:
+      - ./offline-data:/app/offline-data
