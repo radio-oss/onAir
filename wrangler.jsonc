@@ -1,11 +1,9 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "onair",
-  "main": ".next/standalone/server.js",
-  "compatibility_date": "2024-09-23",
-  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_date": "2026-04-01",
   "assets": {
-    "directory": "./public",
-    "binding": "ASSETS"
+    "directory": "./out"
   }
 }
+

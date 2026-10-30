@@ -1,7 +1,6 @@
 name = "onair"
-compatibility_date = "2024-09-23"
-compatibility_flags = ["nodejs_compat"]
+compatibility_date = "2026-04-01"
 
 [assets]
-directory = "./public"
-binding = "ASSETS"
+directory = "./out"
+

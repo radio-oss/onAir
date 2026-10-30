@@ -192,15 +192,22 @@ export default function SystemHealthWidget({
                   <span className="font-bold text-slate-200">
                     {wsHealth.label}
                   </span>
-                  <span
-                    className={`font-mono-tabular text-[10px] px-1.5 py-0.2 rounded font-bold ${
-                      wsHealth.status === 'healthy'
-                        ? 'bg-emerald-500/15 text-emerald-300'
-                        : 'bg-amber-500/15 text-amber-300'
-                    }`}
-                  >
-                    {wsHealth.latencyMs ? `${wsHealth.latencyMs}ms` : 'آنلاین'}
-                  </span>
+                  <div className="flex items-center gap-1.5">
+                    {wsHealth.status === 'healthy' ? (
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                    ) : (
+                      <AlertCircle className="w-3.5 h-3.5 text-amber-400" />
+                    )}
+                    <span
+                      className={`font-mono-tabular text-[10px] px-1.5 py-0.2 rounded font-bold ${
+                        wsHealth.status === 'healthy'
+                          ? 'bg-emerald-500/15 text-emerald-300'
+                          : 'bg-amber-500/15 text-amber-300'
+                      }`}
+                    >
+                      {wsHealth.latencyMs ? `${wsHealth.latencyMs}ms` : 'آنلاین'}
+                    </span>
+                  </div>
                 </div>
                 <p className="text-[11px] text-slate-400 leading-relaxed">
                   {wsHealth.subtext}
@@ -224,15 +231,22 @@ export default function SystemHealthWidget({
                   <span className="font-bold text-slate-200">
                     {dbHealth.label}
                   </span>
-                  <span
-                    className={`font-mono-tabular text-[10px] px-1.5 py-0.2 rounded font-bold ${
-                      dbHealth.status === 'healthy'
-                        ? 'bg-emerald-500/15 text-emerald-300'
-                        : 'bg-amber-500/15 text-amber-300'
-                    }`}
-                  >
-                    همگام
-                  </span>
+                  <div className="flex items-center gap-1.5">
+                    {dbHealth.status === 'healthy' ? (
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                    ) : (
+                      <AlertCircle className="w-3.5 h-3.5 text-amber-400" />
+                    )}
+                    <span
+                      className={`font-mono-tabular text-[10px] px-1.5 py-0.2 rounded font-bold ${
+                        dbHealth.status === 'healthy'
+                          ? 'bg-emerald-500/15 text-emerald-300'
+                          : 'bg-amber-500/15 text-amber-300'
+                      }`}
+                    >
+                      همگام
+                    </span>
+                  </div>
                 </div>
                 <p className="text-[11px] text-slate-400 leading-relaxed">
                   {dbHealth.subtext}
@@ -256,15 +270,22 @@ export default function SystemHealthWidget({
                   <span className="font-bold text-slate-200">
                     {mediaHealth.label}
                   </span>
-                  <span
-                    className={`font-mono-tabular text-[10px] px-1.5 py-0.2 rounded font-bold ${
-                      mediaHealth.status === 'healthy'
-                        ? 'bg-emerald-500/15 text-emerald-300'
-                        : 'bg-amber-500/15 text-amber-300'
-                    }`}
-                  >
-                    پایدار
-                  </span>
+                  <div className="flex items-center gap-1.5">
+                    {mediaHealth.status === 'healthy' ? (
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                    ) : (
+                      <AlertCircle className="w-3.5 h-3.5 text-amber-400" />
+                    )}
+                    <span
+                      className={`font-mono-tabular text-[10px] px-1.5 py-0.2 rounded font-bold ${
+                        mediaHealth.status === 'healthy'
+                          ? 'bg-emerald-500/15 text-emerald-300'
+                          : 'bg-amber-500/15 text-amber-300'
+                      }`}
+                    >
+                      پایدار
+                    </span>
+                  </div>
                 </div>
                 <p className="text-[11px] text-slate-400 leading-relaxed">
                   {mediaHealth.subtext}
@@ -310,28 +331,73 @@ export default function SystemHealthWidget({
         />
         <span className="text-xs font-bold font-sans">سلامت سیستم</span>
 
-        {/* 3 Real-time Status Micro-LEDs (WebSocket, Storage, Media) */}
-        <div className="flex items-center gap-1.5 pr-1 border-r border-slate-700/80">
+        {/* 3 Real-time Status Service Icons (WebSocket, Storage, Media) */}
+        <div className="flex items-center gap-2 pr-1.5 border-r border-slate-700/80">
           <span
-            title="وضعیت ارتباط زنده / WebSocket"
-            className={`w-2 h-2 rounded-full ${
-              wsHealth.status === 'healthy' ? 'bg-emerald-400' : 'bg-amber-400'
-            } animate-pulse`}
-          />
-          <span
-            title="وضعیت همگام‌سازی دیتابیس (Storage Sync)"
-            className={`w-2 h-2 rounded-full ${
-              dbHealth.status === 'healthy' ? 'bg-emerald-400' : 'bg-amber-400'
+            title={`وضعیت ارتباط زنده / WebSocket: ${
+              wsHealth.status === 'healthy' ? 'متصل' : 'هشدار'
             }`}
-          />
+            className="flex items-center gap-1"
+          >
+            <Wifi
+              className={`w-3.5 h-3.5 ${
+                wsHealth.status === 'healthy'
+                  ? 'text-emerald-400'
+                  : 'text-amber-400'
+              }`}
+            />
+            <span
+              className={`w-1.5 h-1.5 rounded-full ${
+                wsHealth.status === 'healthy'
+                  ? 'bg-emerald-400'
+                  : 'bg-amber-400'
+              } animate-pulse`}
+            />
+          </span>
+
           <span
-            title="پایداری اتصال مخزن مدیا (Media Storage)"
-            className={`w-2 h-2 rounded-full ${
-              mediaHealth.status === 'healthy'
-                ? 'bg-emerald-400'
-                : 'bg-amber-400'
+            title={`وضعیت همگام‌سازی دیتابیس (Storage Sync): ${
+              dbHealth.status === 'healthy' ? 'همگام' : 'هشدار'
             }`}
-          />
+            className="flex items-center gap-1"
+          >
+            <Database
+              className={`w-3.5 h-3.5 ${
+                dbHealth.status === 'healthy'
+                  ? 'text-emerald-400'
+                  : 'text-amber-400'
+              }`}
+            />
+            <span
+              className={`w-1.5 h-1.5 rounded-full ${
+                dbHealth.status === 'healthy'
+                  ? 'bg-emerald-400'
+                  : 'bg-amber-400'
+              }`}
+            />
+          </span>
+
+          <span
+            title={`پایداری اتصال مخزن مدیا (Media Storage): ${
+              mediaHealth.status === 'healthy' ? 'پایدار' : 'هشدار'
+            }`}
+            className="flex items-center gap-1"
+          >
+            <HardDrive
+              className={`w-3.5 h-3.5 ${
+                mediaHealth.status === 'healthy'
+                  ? 'text-emerald-400'
+                  : 'text-amber-400'
+              }`}
+            />
+            <span
+              className={`w-1.5 h-1.5 rounded-full ${
+                mediaHealth.status === 'healthy'
+                  ? 'bg-emerald-400'
+                  : 'bg-amber-400'
+              }`}
+            />
+          </span>
         </div>
 
         <ChevronUp
